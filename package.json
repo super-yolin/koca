@@ -4,11 +4,16 @@
   "description": "auto insert js console.log",
   "version": "0.0.1",
   "publisher": "super-yolin",
+  "repository": "https://github.com/super-yolin/koca",
+  "icon": "images/logo.png",
   "engines": {
     "vscode": "^1.52.0"
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "console"
   ],
   "activationEvents": [
     "onLanguage:typescript",
