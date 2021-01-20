@@ -2,7 +2,7 @@
   "name": "koca",
   "displayName": "Koca JS Console",
   "description": "auto insert js console.log",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "super-yolin",
   "repository": "https://github.com/super-yolin/koca",
   "icon": "images/logo.png",

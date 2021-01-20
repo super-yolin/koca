@@ -10,16 +10,28 @@ With selection:
 
 * Highlight a variable (or really any text)
 * Press Cmd+Shift+L
-* The output (on a new line) will be: `console.log(\`Koca: /path/target.js, line 2:  ${variable}\`)`;
+* The output (on a new line) will be: `console.log('Koca: /path/target.js, line 2:  ${variable}')`;
 
 Without selection:
 
 * Press Cmd+Shift+L
-* The output (on the same line) will be:  `console.log(\`Koca: /path/target.js, line 2\`)`;
+* The output (on the same line) will be:  `console.log('Koca: /path/target.js, line 2')`;
 
 ---
 
 ## Release Notes
+
+### 0.0.3
+
+optimize for:
+
+* optimize text show
+  
+### 0.0.2
+
+Fixxed for:
+
+* Fixxed wrap bug
 
 ### 0.0.1
 

@@ -3,8 +3,8 @@
 import * as vscode from 'vscode';
 
 const TAG = 'Koca';
-const kcRegex = /((\`)Koca: .*line \d*.*(\`))/;
-const kcRegexRpl = /(\`)Koca: .*line \d*/;
+const kcRegex = /((\`)Koca: .*L \d*.*(\`))/;
+const kcRegexRpl = /(\`)Koca: .*L \d*/;
 
 const insertText = (val: string) => {
   const editor = vscode.window.activeTextEditor;
@@ -14,13 +14,28 @@ const insertText = (val: string) => {
   }
 
   const selection = editor.selection;
-  const end = selection.end;
-
-  let position = new vscode.Position(end.line, 0);
 
   editor.edit((editBuilder) => {
-    editBuilder.insert(position, val);
+    editBuilder.insert(selection.end, val);
   });
+};
+
+const getPath = () => {
+  const editor = vscode.window.activeTextEditor;
+  if (editor) {
+    const document = editor.document;
+    const workspaceFolders: ReadonlyArray<vscode.WorkspaceFolder> | undefined =
+      vscode.workspace.workspaceFolders;
+    let fileName = document.fileName;
+
+    if (workspaceFolders) {
+      let folderPath = workspaceFolders[0].name;
+      let regex = new RegExp('.*/' + folderPath);
+      fileName = fileName.replace(regex, '');
+    }
+    return fileName;
+  }
+  return '';
 };
 
 export function activate(context: vscode.ExtensionContext) {
@@ -33,6 +48,8 @@ export function activate(context: vscode.ExtensionContext) {
       if (editor) {
         // 获取文档
         const document = editor.document;
+        let fileName = getPath();
+
         // 获取选中文档
         const selection = editor.selection;
         const end = selection.end;
@@ -45,16 +62,16 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands
             .executeCommand('editor.action.insertLineAfter')
             .then(() => {
-              const text = `console.log(\`${TAG}: ${document.fileName}, line ${
+              const text = `console.log(\`${TAG}: ${fileName}, L ${
                 position.line + 1
-              }:  \$\{${word}\}\`);`;
+              }, ${word}:  \$\{${word}\}\`);`;
               insertText(text);
             });
         else {
           vscode.commands
             .executeCommand('editor.action.insertLineAfter')
             .then(() => {
-              const text = `console.log(\`${TAG}: ${document.fileName}, line ${
+              const text = `console.log(\`${TAG}: ${fileName}, L ${
                 position.line + 1
               } \`);`;
               insertText(text);
@@ -72,6 +89,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
+    let fileName = getPath();
     let lineNumberArr: Array<number> = [];
     for (let i = 0; i <= document.lineCount - 1; i++) {
       let line = document.lineAt(i);
@@ -85,7 +103,7 @@ export function activate(context: vscode.ExtensionContext) {
       for (let index of lineNumberArr) {
         let range = document.lineAt(index).range;
         let text = document.lineAt(index).text;
-        let textRpl = `\`${TAG}: ${document.fileName}, line ${index + 1}`;
+        let textRpl = `\`${TAG}: ${fileName}, L ${index + 1}`;
 
         if (!text.includes(textRpl)) {
           let textRep = text.replace(kcRegexRpl, textRpl);
