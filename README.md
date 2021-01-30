@@ -2,7 +2,8 @@
 
 insert console.log with file path and line.
 
-![Usage](images/koca.gif)
+![Usage](https://github.com/super-yolin/koca/raw/master/images/koca.gif)
+
 
 ---
 
