@@ -2,6 +2,12 @@
 
 ## [Changes]
 
+### 0.0.4
+
+remove for:
+
+- remove input filepath
+
 ### 0.0.3
 
 optimize for:

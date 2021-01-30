@@ -2,6 +2,8 @@
 
 insert console.log with file path and line.
 
+![Usage](images/koca.gif)
+
 ---
 
 ## Usage
@@ -10,16 +12,22 @@ With selection:
 
 * Highlight a variable (or really any text)
 * Press Cmd+Shift+L
-* The output (on a new line) will be: `console.log('Koca: /path/target.js, line 2:  ${variable}')`;
+* The output (on a new line) will be: `console.log('Koca: ', <variable>')`;
 
 Without selection:
 
 * Press Cmd+Shift+L
-* The output (on the same line) will be:  `console.log('Koca: /path/target.js, line 2')`;
+* The output (on the same line) will be:  `console.log('Koca: ', <cursor>)`;
 
 ---
 
 ## Release Notes
+
+### 0.0.4
+
+remove for:
+
+* remove input filepath
 
 ### 0.0.3
 
